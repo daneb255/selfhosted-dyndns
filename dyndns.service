@@ -1,0 +1,15 @@
+[Unit]
+Description=dyndns python flask server
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+ExecStartPre=-/bin/rm -f /root/projects/dyndns-update-script/gunicorn.pid
+ExecStart=/root/projects/dyndns-update-script/start_server.sh
+ExecStop=/root/projects/dyndns-update-script/stop_server.sh
+KillMode=process
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
